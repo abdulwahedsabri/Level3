@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Level 3</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #6a11cb, #2575fc);
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .timer {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #fcff3a;
+        animation: pulse 1.5s infinite;
+      }
+
+      button {
+        font-size: 1.5rem;
+        color: #fff;
+        background: #ff416c;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        background: #ff416c;
+        transform: scale(1.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .next-button {
+        margin-top: 30px;
+        background: #28a745;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .next-button:hover {
+        transform: scale(1.1);
+        background: #218838;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      /* Animation Text */
+
+      .styled-text {
+        font-size: 48px;
+        font-weight: bold;
+        color: #3498db; /* Best color: A vibrant blue */
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2),
+          0 0 25px rgba(52, 152, 219, 0.7); /* Shadow effect */
+        letter-spacing: 2px; /* Adding space between letters */
+        text-transform: uppercase; /* Transform text to uppercase */
+        padding: 20px;
+        background-color: rgba(
+          251,
+          219,
+          10,
+          0.875
+        ); /* White background to enhance visibility */
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .styled-text:hover {
+        color: #2ecc71; /* Color change on hover */
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4),
+          0 0 25px rgba(46, 204, 113, 0.7); /* Enhanced shadow on hover */
+        transform: scale(1.1); /* Slightly enlarge text on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="styled-text">Level 3</div>
+      <h2>Mitra AI is Giving a Time to Prepare Yourself ?</h2>
+      <div class="timer" id="timer">--:--</div>
+      <button onclick="startCountdown()">Start Timer</button>
+      <div>
+        <button class="next-button" onclick="goToNextLevel()">
+          Next Level →
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let countdownInterval;
+
+      function generateRandomTime() {
+        const min = 2; // Minimum time in minutes
+        const max = 5; // Maximum time in minutes
+
+        const randomMinutes = Math.floor(Math.random() * (max - min + 1)) + min;
+        const randomSeconds = Math.floor(Math.random() * 60); // Random seconds
+
+        return { minutes: randomMinutes, seconds: randomSeconds };
+      }
+
+      function startCountdown() {
+        clearInterval(countdownInterval); // Clear any existing countdown
+
+        const { minutes, seconds } = generateRandomTime();
+        let totalSeconds = minutes * 60 + seconds;
+
+        function updateTimerDisplay() {
+          const displayMinutes = Math.floor(totalSeconds / 60);
+          const displaySeconds = totalSeconds % 60;
+          document.getElementById("timer").textContent = `${String(
+            displayMinutes
+          ).padStart(2, "0")}:${String(displaySeconds).padStart(2, "0")}`;
+        }
+
+        updateTimerDisplay();
+
+        countdownInterval = setInterval(() => {
+          totalSeconds--;
+
+          if (totalSeconds < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("timer").textContent = "Time's Up!";
+            return;
+          }
+
+          updateTimerDisplay();
+        }, 1000);
+      }
+
+      function goToNextLevel() {
+        window.location.href = "https://abdulwahedsabri.github.io/Level4/"; // Update with the correct link to the next level
+      }
+    </script>
+  </body>
+</html>
